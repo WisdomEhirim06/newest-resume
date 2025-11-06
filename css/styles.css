@@ -335,6 +335,14 @@ header {
   }
 }
 
+/* projects responsiveness */
+.project-card p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+
+
 /* ================================
    TIMELINE
 ================================ */

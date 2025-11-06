@@ -6,38 +6,77 @@ if (window.gsap && window.ScrollTrigger) {
 }
 
 // reveal animations for timeline and projects
-function buildProjects(){
-  const container = document.getElementById('projectsGrid');
-  container.innerHTML = '';
+function buildProjects() {
+  const container = document.getElementById("projectsGrid");
+  container.innerHTML = "";
+
   projects.forEach(p => {
-    const card = document.createElement('article');
-    card.className = 'brutal p-4 timeline-card pre-reveal';
+    const card = document.createElement("article");
+    card.className =
+      "project-card brutal p-4 sm:p-5 pre-reveal flex flex-col gap-4 rounded-lg";
+
     card.innerHTML = `
-      <div class="flex gap-4">
-        <img src="${p.image}" alt="${p.title}" class="w-36 h-24 object-cover rounded-sm border-2 border-[#0B1724]" loading="lazy">
-        <div>
-          <h4 class="text-xl font-bold">${p.title}</h4>
-          <div class="text-sm text-[#6B7280]">${p.subtitle || ''}</div>
-          <p class="mt-2 text-[#374151]">${p.description}</p>
-          <div class="mt-3 flex gap-3">
-            <a href="${p.live}" class="btn-ghost">Live</a>
-            <a href="${p.github}" class="btn-ghost">GitHub</a>
-          </div>
+      <img 
+        src="${p.image}" 
+        alt="${p.title}" 
+        class="w-full h-40 sm:h-48 object-cover rounded-md border-2 border-[#0B1724]" 
+        loading="lazy"
+      />
+
+      <div class="flex flex-col gap-1">
+        <h4 class="text-lg sm:text-xl font-bold leading-tight text-[#0B1724]">
+          ${p.title}
+        </h4>
+
+        <div class="text-xs sm:text-sm text-[#6B7280]">
+          ${p.subtitle || ""}
         </div>
+
+        <p class="mt-1 text-sm sm:text-base text-[#374151] leading-snug break-words">
+          ${p.description}
+        </p>
+      </div>
+
+      <div class="mt-2 flex flex-wrap gap-3">
+        <a 
+          href="${p.live}" 
+          class="btn-primary brutal px-3 py-1.5 text-sm sm:text-base"
+          target="_blank"
+        >
+          Live
+        </a>
+
+        <a 
+          href="${p.github}" 
+          class="btn-ghost brutal px-3 py-1.5 text-sm sm:text-base"
+          target="_blank"
+        >
+          GitHub
+        </a>
       </div>
     `;
+
     container.appendChild(card);
 
+    // Animations (unchanged)
     if (window.gsap && window.ScrollTrigger) {
-      gsap.fromTo(card, { autoAlpha:0, y: 30 }, {
-        autoAlpha:1, y:0, duration: .8, ease: 'power3.out',
-        scrollTrigger: { trigger: card, start: 'top 85%' }
-      });
+      gsap.fromTo(
+        card,
+        { autoAlpha: 0, y: 30 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { trigger: card, start: "top 85%" }
+        }
+      );
     } else {
-      setTimeout(()=>card.classList.add('revealed'), 120);
+      setTimeout(() => card.classList.add("revealed"), 120);
     }
   });
 }
+
 
 function buildTimeline(){
   const list = document.getElementById('timelineList');
