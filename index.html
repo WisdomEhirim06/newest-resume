@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wisdom Ehirim — Full-Stack Developer</title>
+  <meta name="description" content="Wisdom Ehirim — Full Stack Developer. Buiding Solutions to relatable problems" />
+  <meta property="og:title" content="Wisdom Ehirim — Full-Stack Developer" />
+  <meta property="og:description" content="Building modern, bold web experiences with precision and personality." />
+  <meta property="og:image" content="./public/og-image.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN (quick dev) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP + ScrollTrigger (for timeline animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./css/styles.css" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="./public/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./public/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./public/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./public/favicon_io/site.webmanifest">
+</head>
+
+<body class="antialiased bg-[#F5F3EE] text-[#111827]">
+
+  <!-- custom cursor -->
+  <div id="cursor" class="pointer-events-none fixed z-50 hidden">
+    <img id="cursor-img" src="./public/pointer.png" alt="" width="44" height="44">
+  </div>
+
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-transparent">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
+      <div class="flex items-center gap-4">
+        <button id="logo" class="text-xl sm:text-2xl font-bold text-[#0B1724]">Wisdom<span class="text-[#00A8FF]">.</span></button>
+      </div>
+      <nav class="hidden md:flex gap-4 lg:gap-6 items-center">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#tools">Tools</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#timeline">Timeline</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a class="resume-btn ml-4" href="./public/wisdom-ehirim-resume.pdf" download>Resume</a>
+      </nav>
+
+      <button id="mobileToggle" class="md:hidden brutal px-3 py-1.5 text-sm" data-clickable="true">Menu</button>
+    </div>
+
+    <!-- mobile nav -->
+    <div id="mobileNav" class="max-w-6xl mx-auto px-4 sm:px-6 pb-4 hidden md:hidden">
+      <div class="flex flex-col gap-2">
+        <a class="nav-link block py-2" href="#home">Home</a>
+        <a class="nav-link block py-2" href="#about">About</a>
+        <a class="nav-link block py-2" href="#tools">Tools</a>
+        <a class="nav-link block py-2" href="#projects">Projects</a>
+        <a class="nav-link block py-2" href="#timeline">Timeline</a>
+        <a class="nav-link block py-2" href="#contact">Contact</a>
+        <a class="resume-btn block py-2 mt-2 text-center" href="./public/wisdom-ehirim-resume.pdf" download>Download Resume</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-20 sm:pt-24">
+
+    
+    <!-- ===== HERO (video -> carousel) ===== -->
+    <section id="home" class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12 flex flex-col md:flex-row gap-6 sm:gap-8 items-center">
+      <div class="md:w-1/2 w-full">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-[Clash Display] font-extrabold leading-tight" style="color:var(--deep)">
+          Hi - I'm <span class="text-accent-cyan">Wisdom Ehirim</span>.
+        </h1>
+        <p class="mt-3 sm:mt-4 text-base sm:text-lg text-muted max-w-xl">
+          Full-Stack Developer building vibrant, performant product experiences.
+        </p>
+
+        <div class="mt-6 sm:mt-8 flex flex-wrap gap-3">
+          <a href="#projects" class="btn-primary brutal" data-clickable="true">See Projects</a>
+          <a href="#spread" class="btn-ghost brutal" data-clickable="true">Spread the word</a>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 w-full">
+        <div class="brutal p-1 bg-white perspective relative overflow-hidden" aria-hidden="false">
+          <div id="heroMedia" class="w-full h-64 sm:h-80 md:h-96 relative rounded-sm overflow-hidden">
+            <!-- Magic Tap Overlay -->
+            <div id="magicTap" class="absolute inset-0 flex items-center justify-center cursor-pointer">
+              <div class="bg-white/70 backdrop-blur-sm text-[#0B1724] px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-md text-base sm:text-lg font-semibold brutal transition-all hover:scale-105">
+                ✨ Tap here for some magic
+              </div>
+            </div>
+            
+            <!-- video -->
+            <video id="heroVideo" class="absolute inset-0 w-full h-full object-cover"
+              playsinline muted preload="metadata" poster="./public/og-image.jpg">
+              <source src="./public/hero-video.mp4" type="video/mp4" />
+            </video>
+
+            <!-- carousel -->
+            <div id="heroCarousel" class="absolute inset-0 w-full h-full hidden">
+              <div class="carousel-item active" style="background-image:url('./public/og-image.jpg')"></div>
+              <div class="carousel-item" style="background-image:url('./public/scholarhive.jpg')"></div>
+              <div class="carousel-item" style="background-image:url('./public/finda.jpg')"></div>
+              <div class="carousel-item" style="background-image:url('./public/devfest2024.jpg')"></div>
+              <div class="carousel-item" style="background-image:url('./public/gallery-image2.jpg')"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ABOUT (typewriter with cursive font) -->
+    <section id="about" class="max-w-5xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12">
+    <div class="brutal p-4 sm:p-6 md:p-8 relative overflow-hidden">
+        
+
+        <!-- decorative SVG art (subtle) -->
+        <svg class="absolute right-4 sm:right-6 top-4 sm:top-6 w-24 sm:w-32 md:w-40 opacity-10" viewBox="0 0 100 100" aria-hidden>
+        <circle cx="50" cy="50" r="46" fill="url(#g1)"></circle>
+        <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#00A8FF"/><stop offset="1" stop-color="#FF6B6B"/></linearGradient></defs>
+        </svg>
+
+        <div id="typewrap" class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[Great Vibes] leading-tight"></div>
+
+        <p class="mt-4 sm:mt-6 text-sm sm:text-base text-muted">I build and ship end-to-end products. APIs, UIs, and infrastructure with a major focus on designing better software</p>
+    </div>
+    </section>
+
+
+    <!-- ===== TOOLS (orbit layout) ===== -->
+    <section id="tools" class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12">
+    <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6" style="color:var(--deep)">Languages & Tools</h3>
+
+    <div class="relative w-full min-h-[300px] sm:min-h-[320px] md:min-h-[400px]">
+        <!-- decorative background art -->
+        <div class="absolute inset-0 -z-10">
+        <svg class="w-full h-full opacity-6" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+            <path d="M0,100 C30,0 70,0 100,100 Z" fill="#fff"></path>
+        </svg>
+        </div>
+
+        <!-- orbit container -->
+        <div id="toolsOrbit" class="absolute inset-0 flex items-center justify-center"></div>
+    </div>
+    </section>
+
+
+    <!-- PROJECTS -->
+    <section id="projects" class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12">
+      <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6" style="color:#0B1724;">Projects</h3>
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"></div>
+    </section>
+
+    <!-- TIMELINE (connector) -->
+    <section id="timeline" class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12">
+      <h3 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6" style="color:#0B1724;">Timeline</h3>
+
+      <div class="flex flex-wrap gap-2 sm:gap-4 mb-4 sm:mb-6">
+        <button class="filter-btn brutal px-2.5 sm:px-3 py-1 text-sm" data-filter="all">All</button>
+        <button class="filter-btn brutal px-2.5 sm:px-3 py-1 text-sm" data-filter="education">Education</button>
+        <button class="filter-btn brutal px-2.5 sm:px-3 py-1 text-sm" data-filter="experience">Experience</button>
+        <button class="filter-btn brutal px-2.5 sm:px-3 py-1 text-sm" data-filter="hackathon">Hackathons</button>
+      </div>
+
+      <div class="relative">
+        <!-- vertical connector -->
+        <div class="absolute left-4 sm:left-6 md:left-8 top-0 bottom-0 w-0.5 sm:w-1" style="background: linear-gradient(#00A8FF, #F2B705); opacity:0.7;"></div>
+
+        <div id="timelineList" class="ml-12 sm:ml-16 md:ml-20 space-y-6 sm:space-y-8"></div>
+      </div>
+    </section>
+
+    <!-- ===== SPREAD (Resume CTA) ===== -->
+    <section id="spread" class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12">
+    <div class="brutal p-4 sm:p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="text-center md:text-left">
+        <h4 class="text-xl sm:text-2xl font-bold" style="color:var(--deep)">Want to spread the word about Wisdom?</h4>
+        <p class="text-muted mt-2 text-sm sm:text-base">Download the résumé and share it with your team or network.</p>
+        </div>
+
+        <div class="w-full md:w-auto">
+        <a id="downloadResume" href="./public/wisdom-ehirim-resume.pdf" download class="btn-primary-lg brutal block md:inline-block text-center" data-clickable="true">📄 Download Résumé</a>
+        </div>
+    </div>
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="max-w-4xl mx-auto px-4 sm:px-6 md:px-12 py-8 sm:py-12">
+      <h3 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4" style="color:#0B1724;">Contact</h3>
+      <p class="text-[#374151] mb-4 sm:mb-6 text-sm sm:text-base">Briefly describe the project and I'll get back to you.</p>
+
+      <form id="contactForm" action="https://formspree.io/f/xgvogkee" method="POST" class="grid gap-3 sm:gap-4">
+        <input name="name" placeholder="Your name" required class="p-2.5 sm:p-3 border-2 border-[#0B1724] rounded text-sm sm:text-base" />
+        <input type="email" name="email" placeholder="Your email" required class="p-2.5 sm:p-3 border-2 border-[#0B1724] rounded text-sm sm:text-base" />
+        <textarea name="message" rows="5" placeholder="Describe project" required class="p-2.5 sm:p-3 border-2 border-[#0B1724] rounded text-sm sm:text-base"></textarea>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+          <button type="submit" class="btn-primary brutal px-4 py-2 w-full sm:w-auto" data-clickable="true">Let Wisdom do it.</button>
+          <div id="contactMsg" aria-live="polite" class="text-sm"></div>
+        </div>
+      </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-6 sm:py-8 mt-8 sm:mt-12 bg-transparent">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 text-center">
+        <div class="text-sm sm:text-base">Made with <span aria-hidden>❤️</span> and sleep deprivation.</div>
+        <div class="mt-3 flex justify-center gap-4 sm:gap-6">
+          <a href="https://www.linkedin.com/in/wisdom-ehirim/" class="hover:text-[#00A8FF]" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          <a href="https://github.com/WisdomEhirim06" class="hover:text-[#00A8FF]" aria-label="Github"><i data-lucide="github"></i></a>
+          <a href="https://www.instagram.com/wisdom_ehirim/" class="hover:text-[#00A8FF]" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- DATA + SCRIPTS -->
+  <script type="module" src="./js/data.js"></script>
+  <script type="module" src="./js/typewriter.js" defer></script>
+  <script type="module" src="./js/scrollAnimations.js" defer></script>
+  <script type="module" src="./js/confetti.js" defer></script>
+  <script type="module" src="./js/main.js" defer></script>
+  <script type="module" src="./js/tools-grid.js" defer></script>
+  <script type="module" src="./js/video-carousel.js" defer></script>
+</body>
+</html>
