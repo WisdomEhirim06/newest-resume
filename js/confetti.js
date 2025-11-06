@@ -10,6 +10,8 @@ export function burstConfetti(){
 }
 
 // Attach to contact form submit if not already attached
+// Just testing something
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm');
   const msg = document.getElementById('contactMsg');
